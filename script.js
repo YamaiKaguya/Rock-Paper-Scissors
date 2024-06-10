@@ -2,15 +2,24 @@ document.addEventListener ('DOMContentLoaded', function() {
 
 
     const score = document.getElementById('score');
+    const reset = document.getElementById('reset');
 
     const rock = document.getElementById('Rock');
     const paper = document.getElementById('Paper');
     const scissors = document.getElementById('Scissors');
 
-    let Win = 0, Loss = 0, Tie = 0;
+    const scoreData = JSON.parse(localStorage.getItem('localScore')) || {
+        Win: 0, 
+        Loss: 0, 
+        Tie: 0
+    };
+
+    function initialDisplay (){
+        score.innerHTML = `Computer chose: None <br> Win: ${scoreData.Win} Loss: ${scoreData.Loss} Tie: ${scoreData.Tie}`
+    }
 
     function gameResult(computerMove){
-        score.innerHTML = `Computer choose: ${computerMove} <br> Win: ${Win} Loss: ${Loss} Tie: ${Tie}`
+        score.innerHTML = `Computer chose: ${computerMove} <br> Win: ${scoreData.Win} Loss: ${scoreData.Loss} Tie: ${scoreData.Tie}`
     }
 
     function computerMove(){
@@ -34,14 +43,15 @@ document.addEventListener ('DOMContentLoaded', function() {
         const computer = computerMove;
 
         if (playerMove === computer) {
-            Tie++;
+            scoreData.Tie++;
         } else if ((playerMove === 'Rock' && computer === 'Scissors') ||
                 (playerMove === 'Paper' && computer === 'Rock') ||
                 (playerMove === 'Scissors' && computer === 'Paper')) {
-            Win++;
+                scoreData.Win++;
         } else {
-            Loss++;
+            scoreData.Loss++;
         }
+        localStorage.setItem('localScore', JSON.stringify(scoreData))
         return computer;
     }
 
@@ -56,4 +66,17 @@ document.addEventListener ('DOMContentLoaded', function() {
     scissors.addEventListener ('click', function(event){
         gameResult(gameMaker('Scissors', computerMove()));
     });
+
+    reset.addEventListener ('click', function(event){
+        scoreData = { 
+            Win: 0, 
+            Loss: 0, 
+            Tie: 0 
+        };
+        
+        localStorage.setItem('localScore', JSON.stringify(scoreData));
+        initialDisplay ();
+    });
+    
+    initialDisplay();
 });
