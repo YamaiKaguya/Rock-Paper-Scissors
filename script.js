@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const score = document.getElementById('score');
     const reset = document.getElementById('reset');
 
-    const rock = document.getElementById('Rock');
-    const paper = document.getElementById('Paper');
-    const scissors = document.getElementById('Scissors');
+    const rock = document.getElementById('rock');
+    const paper = document.getElementById('paper');
+    const scissors = document.getElementById('scissors');
 
     let scoreData = JSON.parse(localStorage.getItem('localScore')) || {
         Win: 0, 
@@ -73,8 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Loss: 0, 
             Tie: 0 
         };
-        localStorage.setItem('localScore', JSON.stringify(scoreData));
-        initialDisplay();
+        initialDisplay(localStorage.setItem('localScore', JSON.stringify(scoreData)));
     });
 
     initialDisplay();
