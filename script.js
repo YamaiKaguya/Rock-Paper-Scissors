@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function initialDisplay(){
-        score.innerHTML = `Computer chose: None <br> Win: ${scoreData.Win} Loss: ${scoreData.Loss} Tie: ${scoreData.Tie}`;
+        score.innerHTML = `YOU CHOSE: NONE COMPUTER CHOSE: NONE <br>SCORE: WIN: ${scoreData.Win} LOSS: ${scoreData.Loss} TIE: ${scoreData.Tie}`;
     }
 
-    function gameResult(computerMove){
-        score.innerHTML = `Computer chose: ${computerMove} <br> Win: ${scoreData.Win} Loss: ${scoreData.Loss} Tie: ${scoreData.Tie}`;
+    function gameResult(userMove, computerMove){
+        score.innerHTML = `YOU CHOSE: ${userMove} COMPUTER CHOSE: ${computerMove} <br> SCORE: WIN: ${scoreData.Win} LOSS: ${scoreData.Loss} TIE: ${scoreData.Tie}`;
     }
 
     function computerMove(){
@@ -56,15 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     rock.addEventListener('click', function(event){
-        gameResult(gameMaker('Rock', computerMove));
+        gameResult('Rock', gameMaker('Rock', computerMove));
     });
 
     paper.addEventListener('click', function(event){
-        gameResult(gameMaker('Paper', computerMove));
+        gameResult('Paper',gameMaker('Paper', computerMove));
     });
 
     scissors.addEventListener('click', function(event){
-        gameResult(gameMaker('Scissors', computerMove));
+        gameResult('Scissors',gameMaker('Scissors', computerMove));
     });
 
     reset.addEventListener('click', function(event){
