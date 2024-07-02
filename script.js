@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return move;
     }
 
-    function gameMaker(playerMove, computerMove){
+    function gameMaker(playerMove){
         const computer = computerMove();
 
         if (playerMove === computer) {
@@ -56,15 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     rock.addEventListener('click', function(event){
-        gameResult('Rock', gameMaker('Rock', computerMove));
+        gameResult('Rock', gameMaker('Rock'));
     });
 
     paper.addEventListener('click', function(event){
-        gameResult('Paper',gameMaker('Paper', computerMove));
+        gameResult('Paper',gameMaker('Paper'));
     });
 
     scissors.addEventListener('click', function(event){
-        gameResult('Scissors',gameMaker('Scissors', computerMove));
+        gameResult('Scissors',gameMaker('Scissors'));
     });
 
     reset.addEventListener('click', function(event){
@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Loss: 0, 
             Tie: 0 
         };
-        initialDisplay(localStorage.setItem('localScore', JSON.stringify(scoreData)));
+        localStorage.setItem('localScore', JSON.stringify(scoreData));
+        initialDisplay();
     });
 
     initialDisplay();
